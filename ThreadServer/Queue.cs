@@ -82,16 +82,7 @@ namespace ThreadServer
         }
         
 
-//***********COUT***************
-        public void Count()
-        {
 
-        }
-
-        public static void from_program()
-        {
-
-        }
 //*******************HELP***************
         public void Help(Byte[] sendBytes, NetworkStream networkStream)
         {
