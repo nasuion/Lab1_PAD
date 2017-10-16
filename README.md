@@ -1,1 +1,1 @@
-# LAB1_PAD
+# Lab Nr.1 Message Broker
