@@ -38,18 +38,17 @@ namespace ThreadServer
 //Show message to client from command.cs
                         comm = com.Next_command;
                         que.Put(myq, sendBytes, networkStream, clientSocket);
-
+                        myq.Clear();
                     }
                     else if (str == "GET")
                     {
 //Read queue from file
-                        read_queue();
+                        read_queue(sendBytes, networkStream, clientSocket);
                         Console.WriteLine(" >> Command 'GET' selected at client:" + Number_Client);
 //Show message to client from command.cs
                         comm = com.Next_command;
                         que.Get(myq, sendBytes, networkStream, clientSocket);
 //Clear queue to avoid duplication when execute GET
-                            myq.Clear();
                     }
 
                     else if (str == "HELP")
@@ -88,17 +87,21 @@ namespace ThreadServer
             networkStream.Flush();
         }
 //Read each line from text file
-        public void read_queue()
+        public void read_queue(Byte[] sendBytes, NetworkStream networkStream, TcpClient clientSocket)
         {
+            
             string[] lines = System.IO.File.ReadAllLines(@"C:\\Users\\nasui\\Desktop\\file.txt");
 // Display the file contents by using a foreach loop.
             try
             {
+                
                 foreach (string line in lines)
                 {
                     String[] substrings = line.Split(new string[] { " Element " }, StringSplitOptions.None);
                     myq.Enqueue(substrings[1]);
+
                 }
+               
             }
             catch (Exception ex)
             {

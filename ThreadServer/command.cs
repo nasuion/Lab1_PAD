@@ -47,7 +47,7 @@ namespace ThreadServer
         {
             get { return next_command; } set { next_command = value; }
         }
-        private string help = "This is help!!";
+        private string help = "This is help!! \n\nSelect next command ('PUT','GET','CLEAR','HELP')";
 
         public string Help
         {

@@ -87,7 +87,7 @@ namespace ThreadServer
         public void Help(Byte[] sendBytes, NetworkStream networkStream)
         {
             int i = 0;
-            List<string> list = new List<string>() { "Press Enter for show!!!", "**PUT** Add text in queue\n\n", "**GET** View all elements from queue\n\n", "**STOP** For Back to select another function \n\n","** **\n\n" };
+            List<string> list = new List<string>() { "Press Enter for show!!!", "**PUT** Add text in queue\n\n", "**GET** View all elements from queue\n\n", "**STOP** For Back to select another function \n\n","**CLEAR** Delete all elements from queue\n\n" };
             while (i <= 4)
             {
                 string object_m= null;
@@ -110,11 +110,14 @@ namespace ThreadServer
                         to_client(sendBytes, networkStream, q);
                         i++;
                     }
+                    
+
                     foreach (Object obj in myCollection)
                     {
                         string w = "From queue Element " + obj.ToString() + "\n";
                         to_client(sendBytes, networkStream, w);
                     }
+
                     string object_m = "PRESS 'STOP' for EXIT";
                     to_client(sendBytes, networkStream, object_m);
             
