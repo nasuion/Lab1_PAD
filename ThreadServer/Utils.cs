@@ -22,33 +22,33 @@ namespace ThreadServer
           
                 try
                 {
-                    
-                    if (str == "GO")
-                     {
-                           Console.WriteLine(" >> Command 'GO' selected at client:" + Number_Client);
-                           comm = com.Welcome1;
 
-                      }
+                    if (str == "GO")
+                    {
+                        Console.WriteLine(" >> Command 'GO' selected at client:" + Number_Client);
+                        comm = com.Welcome1;
+
+                    }
                     else if (str == "PUT" || str == "P")
                     {
 
                         Console.WriteLine(" >> Command 'PUT' is selected at client:" + Number_Client);
-                         string into_put = com.IntoPUT;
+                        string into_put = com.IntoPUT;
                         sender_to_client(sendBytes, networkStream, into_put, clientSocket);
-//Show message to client from command.cs
+                        //Show message to client from command.cs
                         comm = com.Next_command;
                         que.Put(myq, sendBytes, networkStream, clientSocket);
                         myq.Clear();
                     }
                     else if (str == "GET")
                     {
-//Read queue from file
+                        //Read queue from file
                         read_queue(sendBytes, networkStream, clientSocket);
                         Console.WriteLine(" >> Command 'GET' selected at client:" + Number_Client);
-//Show message to client from command.cs
+                        //Show message to client from command.cs
                         comm = com.Next_command;
                         que.Get(myq, sendBytes, networkStream, clientSocket);
-//Clear queue to avoid duplication when execute GET
+                        //Clear queue to avoid duplication when execute GET
                     }
 
                     else if (str == "HELP")
@@ -63,11 +63,18 @@ namespace ThreadServer
                         clear_file();
                         comm = com.Clear;
                     }
-                else
-                {
-                    Console.WriteLine(" >> " + com.Verify + Number_Client + ")");
-                    comm = com.Opps;
-                }
+                    else if (str == "GETO")
+                    {
+                        read_queue(sendBytes, networkStream, clientSocket);
+                        Console.WriteLine(com.Geto);
+                        que.get_one(myq, sendBytes, networkStream,clientSocket);
+                        comm = com.Next_command;
+                    }
+                    else
+                    {
+                        Console.WriteLine(" >> " + com.Verify + Number_Client + ")");
+                        comm = com.Opps;
+                    }
                  
                 }
                 catch(Exception ex){
@@ -112,6 +119,18 @@ namespace ThreadServer
         {
             string path = "C:\\Users\\nasui\\Desktop\\file.txt";
             File.WriteAllText(path, String.Empty);
+        }
+        public void first_line()
+        {
+            string filePath = "C:\\Users\\nasui\\Desktop\\file.txt";
+            System.IO.StreamReader fileR = new System.IO.StreamReader(filePath);
+            string data = fileR.ReadToEnd();
+            fileR.Close();
+            string firstline = data.Substring(0, data.IndexOf('\n') + 1);
+            data = Regex.Replace(data, firstline, "");
+            StreamWriter file = new StreamWriter(filePath, false);
+            file.Write(data);
+            file.Close();
         }
         
     }

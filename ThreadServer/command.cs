@@ -15,7 +15,7 @@ namespace ThreadServer
         {
             get { return connect; } set { connect = value; }
         }
-        private string welcome = "Welcome is Vanea's Broker\nYou can execute ('PUT','GET','CLEAR','HELP')";
+        private string welcome = "Welcome is Vanea's Broker\nYou can execute ('PUT','GET','CLEAR','HELP','GETO')";
 
         public string Welcome1
         {
@@ -41,13 +41,13 @@ namespace ThreadServer
         {
             get { return intoPUT; } set { intoPUT = value; }
         }
-        private string next_command = "Select next command ('PUT','GET','CLEAR','HELP')";
+        private string next_command = "Select next command ('PUT','GET','CLEAR','HELP','GETO')";
 
         public string Next_command
         {
             get { return next_command; } set { next_command = value; }
         }
-        private string help = "This is help!! \n\nSelect next command ('PUT','GET','CLEAR','HELP')";
+        private string help = "This is help!! \n\nSelect next command ('PUT','GET','CLEAR','HELP','GETO')";
 
         public string Help
         {
@@ -75,8 +75,20 @@ namespace ThreadServer
             get { return clear; }
             set { clear = value; }
         }
-        /*private string name = "You are connected!!!";*/
-        /*private string name = "You are connected!!!";*/
+        private string geto = "Command 'GETO' Selected!";
+
+        public string Geto
+        {
+            get { return geto; }
+            set { geto = value; }
+        }
+        private string getoclient = "You are connected!!!";
+
+        public string Getoclient
+        {
+            get { return getoclient; }
+            set { getoclient = value; }
+        }
 
   
         

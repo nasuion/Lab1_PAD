@@ -87,7 +87,7 @@ namespace ThreadServer
         public void Help(Byte[] sendBytes, NetworkStream networkStream)
         {
             int i = 0;
-            List<string> list = new List<string>() { "Press Enter for show!!!", "**PUT** Add text in queue\n\n", "**GET** View all elements from queue\n\n", "**STOP** For Back to select another function \n\n","**CLEAR** Delete all elements from queue\n\n" };
+            List<string> list = new List<string>() { "Press Enter for show!!!", "**PUT** Add text in queue\n\n", "**GET** View all elements from queue\n\n", "**STOP** For Back to select another function \n\n","**CLEAR** Delete all elements from queue\n\n","**GETO** Consume each message from queue"};
             while (i <= 4)
             {
                 string object_m= null;
@@ -99,7 +99,19 @@ namespace ThreadServer
         }
 
 
+        public void get_one(Queue myq, Byte[] sendBytes, NetworkStream networkStream, TcpClient clientSocket)
+        {
+            Utils util = new Utils();
+            //util.read_queue(sendBytes,networkStream,clientSocket);
+            Object o =  myq.Dequeue();
+            object_m = "Your first element dequeued '"+o.ToString()+"'";
+            to_client(sendBytes, networkStream, object_m);
+            util.first_line();
+            
+           
 
+
+        }
         public static void GET_EXT(IEnumerable myCollection, Byte[] sendBytes, NetworkStream networkStream)
         {
                 List<string> queList = new List<string>() { "PressEnter" };
@@ -155,5 +167,6 @@ namespace ThreadServer
             networkStream.Write(sendBytes, 0, sendBytes.Length);
             networkStream.Flush();
         }
+   
     }
 }
