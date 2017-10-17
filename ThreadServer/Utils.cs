@@ -7,7 +7,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-
+//Diagrama componenete si queue thread safe
 namespace ThreadServer
 {
     class Utils

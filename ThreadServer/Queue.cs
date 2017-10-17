@@ -103,9 +103,16 @@ namespace ThreadServer
         {
             Utils util = new Utils();
             //util.read_queue(sendBytes,networkStream,clientSocket);
-            Object o =  myq.Dequeue();
-            object_m = "Your first element dequeued '"+o.ToString()+"'";
-            to_client(sendBytes, networkStream, object_m);
+            object o;
+            if(myq.Count > 0)
+            {
+                lock(myq){
+                    o = myq.Dequeue();
+                    object_m = "Your first element dequeued '" + o.ToString() + "'";
+                    to_client(sendBytes, networkStream, object_m);
+                }
+            }
+            
             util.first_line();
             
            
