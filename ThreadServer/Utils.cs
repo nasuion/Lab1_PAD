@@ -38,11 +38,18 @@ namespace ThreadServer
                         //Show message to client from command.cs
                         comm = com.Next_command;
                         que.Put(myq, sendBytes, networkStream, clientSocket);
-                        myq.Clear();
+                    
                     }
                     else if (str == "GET")
                     {
-                        myq.Clear();
+                        lock (myq)
+                        {
+                            if (myq.Count > 0)
+                            {
+                                myq.Clear();
+
+                            }
+                        }
                         //Read queue from file
                         read_queue(sendBytes, networkStream, clientSocket);
                         Console.WriteLine(" >> Command 'GET' selected at client:" + Number_Client);
@@ -106,7 +113,10 @@ namespace ThreadServer
                 foreach (string line in lines)
                 {
                     String[] substrings = line.Split(new string[] { " Element " }, StringSplitOptions.None);
-                    myq.Enqueue(substrings[1]);
+                    lock (myq)
+                    {
+                        myq.Enqueue(substrings[1]);
+                    }
 
                 }
                

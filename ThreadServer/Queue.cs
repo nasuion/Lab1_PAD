@@ -36,9 +36,14 @@ namespace ThreadServer
                 }
                 else
                 {
-                    myq.Enqueue(str);
-                    Object objectQueue = myq.Count;
-                    Console.WriteLine(" >> Enqueued '" + objectQueue.ToString() + "' element");
+                    object o;
+                   lock(myq){
+
+                           myq.Enqueue(str);
+                           Object objectQueue = myq.Count;
+                           Console.WriteLine(" >> Enqueued '" + objectQueue.ToString() + "' element");
+                    }
+                    
                 }
 
                 string next = "Enter next string or enter 'STOP' for exit";
