@@ -42,6 +42,7 @@ namespace ThreadServer
                     }
                     else if (str == "GET")
                     {
+                        myq.Clear();
                         //Read queue from file
                         read_queue(sendBytes, networkStream, clientSocket);
                         Console.WriteLine(" >> Command 'GET' selected at client:" + Number_Client);
