@@ -66,7 +66,7 @@ namespace ThreadServer
                     else if (str == "GETO")
                     {
                         read_queue(sendBytes, networkStream, clientSocket);
-                        Console.WriteLine(com.Geto);
+                        Console.WriteLine(com.Geto + "at client" + Number_Client);
                         que.get_one(myq, sendBytes, networkStream,clientSocket);
                         comm = com.Next_command;
                     }
